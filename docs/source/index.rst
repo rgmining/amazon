@@ -31,10 +31,10 @@ Usage
 ------
 This package provides module :mod:`amazon` and this module provides
 function :meth:`amazon.load`.
-The function `load` takes a graph object which implements
+The function ``load`` takes a graph object which implements
 the :ref:`graph interface <dataset-io:graph-interface>`
 defined in :ref:`Review Graph Mining project <project:top>`.
-The funciton `load` also takes an optional argument, a list of categories.
+The funciton ``load`` also takes an optional argument, a list of categories.
 If this argument is given, only reviews for products which belong to the given
 categories will be loaded.
 
