@@ -1,0 +1,7 @@
+language: python
+python:
+  - "2.7"
+before_script:
+  - wget http://times.cs.uiuc.edu/~wang296/Data/LARA/Amazon/AmazonReviews.zip
+script:
+  - python setup.py test

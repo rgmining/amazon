@@ -1,0 +1,25 @@
+box: jkawamoto/ghp-box
+build:
+  steps:
+    - script:
+        name: Noop
+        code: echo "No build script"
+doc:
+  steps:
+    - script:
+        name: Prepare submodules
+        code: |-
+          git submodule update --init
+    - jkawamoto/sphinx:
+        basedir: docs
+        packages: sphinx-autobuild sphinxcontrib-napoleon -e git+https://github.com/snide/sphinx_rtd_theme#egg=sphinx_rtd_theme-master
+    - samueldebruyn/minify:
+        base_dir: docs/build/html
+        png: false
+        js: false
+deploy:
+  steps:
+    - jkawamoto/ghp-import:
+        token: $GIT_TOKEN
+        basedir: docs/build/html
+        baseurl: https://rgmining.github.io/amazon/
