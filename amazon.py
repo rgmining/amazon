@@ -19,12 +19,30 @@
 # along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 #
 # pylint: disable=invalid-name
-"""This module provides a loading function of a Amazon Dataset.
+"""This module provides a loading function of an Amazon Dataset.
 
-It also a helper function, :meth:`print_state`, to output a state of a graph
-object.
+The dataset consists of reviews for products insix categories.
+The list of the categoris are defined :data:`CATEGORIES`.
+If you give one or a list of categories chosed from the list to :meth:`load`,
+the function will load only reviews for products belong to the given categories.
+
+This package also provides a helper function, :meth:`print_state`,
+to output a state of a graph object.
+
 To use both fuctions, the graph object must implement the
 :ref:`graph interface <dataset-io:graph-interface>`.
+
+This is statistics of ratings and the number of reviewers:
+
+============= ========================
+Rating score  The number of reviewers
+============= ========================
+1.0           26754
+2.0           16964
+3.0           20294
+4.0           57011
+5.0           148373
+============= ========================
 """
 from __future__ import division
 import datetime
@@ -75,9 +93,11 @@ def load(graph, categories=None):
 
     path = "AmazonReviews.zip"
     if not exists(path):
-        path = join(sys.prefix, "rgmining","data", path)
+        path = join(sys.prefix, "rgmining", "data", path)
     if not exists(path):
-        path = join(site.getuserbase(), "rgmining","data", path)
+        path = join(sys.prefix, "local", "rgmining", "data", path)
+    if not exists(path):
+        path = join(site.getuserbase(), "rgmining", "data", path)
 
     R = {}  # Reviewers dict.
     with zipfile.ZipFile(path) as archive:
