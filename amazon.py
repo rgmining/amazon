@@ -62,17 +62,6 @@ CATEGORIES = [
 """Categories this dataset has.
 """
 
-
-def _files(tar):
-    """Yields a file in the tar file.
-    """
-    info = tar.next()
-    while info:
-        if info.isfile():
-            yield info
-        info = tar.next()
-
-
 def load(graph, categories=None):
     """Load the Amazon dataset to a given graph object.
 
@@ -91,13 +80,14 @@ def load(graph, categories=None):
     if categories and isinstance(categories, (list, tuple)):
         categories = list(categories)
 
-    path = "AmazonReviews.zip"
+    base = "AmazonReviews.zip"
+    path = join(".", base)
     if not exists(path):
-        path = join(sys.prefix, "rgmining", "data", path)
+        path = join(sys.prefix, "rgmining", "data", base)
     if not exists(path):
-        path = join(sys.prefix, "local", "rgmining", "data", path)
+        path = join(sys.prefix, "local", "rgmining", "data", base)
     if not exists(path):
-        path = join(site.getuserbase(), "rgmining", "data", path)
+        path = join(site.getuserbase(), "rgmining", "data", base)
 
     R = {}  # Reviewers dict.
     with zipfile.ZipFile(path) as archive:
