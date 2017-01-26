@@ -1,0 +1,169 @@
+ <!DOCTYPE html> <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]--> <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]--> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>example &mdash; Amazon Dataset Loader 0.5.0 documentation</title> <link rel="search" type="application/opensearchdescription+xml" title="Search within Amazon Dataset Loader 0.5.0 documentation" href="../_static/opensearch.xml"> <link rel="stylesheet" href="../_static/css/theme.css"> <link rel="index" title="Index" href="../genindex.html"> <link rel="search" title="Search" href="../search.html"> <link rel="top" title="Amazon Dataset Loader 0.5.0 documentation" href="../index.html"> <link rel="up" title="Module code" href="index.html"> <meta name="title" content="example &mdash; Amazon Dataset Loader 0.5.0 documentation"> <meta name="description" content="example"> <meta property="og:type" content="article"> <meta property="og:title" content="example &mdash; Amazon Dataset Loader 0.5.0 documentation"> <meta property="og:image" content="https://rgmining.github.io/amazon/_static/image.png"> <meta property="og:url" content="https://rgmining.github.io/amazon/_modules/example.html"> <meta property="og:site_name" content="Amazon Dataset Loader 0.5.0 documentation"> <meta property="og:description" content="example"> <meta name="twitter:site" content="@junkawamoto"> <meta name="twitter:card" content="example"> <script src="https://use.fontawesome.com/f179dac0e7.js" async></script> <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4734862314145555",enable_page_level_ads:!0})</script> <script>!function(e,t,a,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=t.createElement(a),s=t.getElementsByTagName(a)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-82315630-2","auto"),ga("send","pageview")</script> <script src="../_static/js/modernizr.min.js"></script> </head> <body class="wy-body-for-nav" role="document"> <div class="wy-grid-for-nav"> <nav data-toggle="wy-nav-shift" class="wy-nav-side"> <div class="wy-side-scroll"> <div class="wy-side-nav-search"> <a href="../index.html" class="icon icon-home"> Amazon Dataset Loader </a> <div class="version"> 0.5 </div> <div role="search"> <form id="rtd-search-form" class="wy-form" action="../search.html" method="get"> <input type="text" name="q" placeholder="Search docs"> <input type="hidden" name="check_keywords" value="yes"> <input type="hidden" name="area" value="default"> </form> </div> </div> <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation"> <div class="local-toc"></div> <hr> <ul> <li><a href="https://rgmining.github.io/">Review Graph Mining Project Top</a></li> <li><a href="https://rgmining.github.io/forum.html">Forum</a></li> </ul> <hr> <div style="padding:0"> <div style="width:300px;margin:auto"> <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px" data-ad-client="ca-pub-4734862314145555" data-ad-slot="6934003829"></ins> <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> </div> </div> </div> </div> </nav> <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"> <nav class="wy-nav-top" role="navigation" aria-label="top navigation"> <i data-toggle="wy-nav-top" class="fa fa-bars"></i> <a href="../index.html">Amazon Dataset Loader</a> </nav> <div class="wy-nav-content"> <div class="rst-content"> <div role="navigation" aria-label="breadcrumbs navigation"> <ul class="wy-breadcrumbs"> <li><a href="../index.html">Docs</a> &raquo;</li> <li><a href="index.html">Module code</a> &raquo;</li> <li>example</li> <li class="wy-breadcrumbs-aside"> </li> </ul> <hr> </div> <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article"> <div itemprop="articleBody"> <h1>Source code for example</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1">#</span>
+<span class="c1"># example.py</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2017 Junpei Kawamoto</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of rgmining-amazon-dataset.</span>
+<span class="c1">#</span>
+<span class="c1"># rgmining-amazon-dataset is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># rgmining-amazon-dataset is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with rgmining-amazon-dataset.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;Evaluate a review graph mining algorithm with the amazon dataset.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># pylint: disable=invalid-name</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="k">import</span> <span class="n">getLogger</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">dsargparse</span>
+<span class="kn">import</span> <span class="nn">amazon</span>
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1">#--------------------------</span>
+<span class="c1"># Loading algorithms</span>
+<span class="c1">#--------------------------</span>
+<span class="n">ALGORITHMS</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="sd">&quot;&quot;&quot;Dictionary of graph loading functions associated with installed algorithms.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Load and register RIA.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ria</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;rgmining-ria is not installed.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">ignore_args</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a wrapped function which ignore given arguments.&quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="o">*</span><span class="n">_args</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;The function body.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;ria&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ria</span><span class="o">.</span><span class="n">ria_graph</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ignore_args</span><span class="p">(</span><span class="n">ria</span><span class="o">.</span><span class="n">one_graph</span><span class="p">)</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;onesum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ignore_args</span><span class="p">(</span><span class="n">ria</span><span class="o">.</span><span class="n">one_sum_graph</span><span class="p">)</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;mra&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ignore_args</span><span class="p">(</span><span class="n">ria</span><span class="o">.</span><span class="n">mra_graph</span><span class="p">)</span>
+
+
+<span class="c1"># Load and register RSD.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">rsd</span>  <span class="c1"># pylint: disable=wrong-import-position</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;rgmining-rsd is not installed.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;rsd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsd</span><span class="o">.</span><span class="n">ReviewGraph</span>
+
+
+<span class="c1"># Load and register Fraud Eagle.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">fraud_eagle</span>  <span class="c1"># pylint: disable=wrong-import-position</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;rgmining-fraud-eagle is not installed.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;feagle&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fraud_eagle</span><span class="o">.</span><span class="n">ReviewGraph</span>
+
+
+<span class="c1"># Load and register FRAUDAR.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">fraudar</span>  <span class="c1"># pylint: disable=wrong-import-position</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;rgmining-fraudar is not installed.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_fraudar_graph</span><span class="p">(</span><span class="n">nblock</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a review graph defined in Fraud Eagle package.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">fraudar</span><span class="o">.</span><span class="n">ReviewGraph</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nblock</span><span class="p">))</span>
+    <span class="n">ALGORITHMS</span><span class="p">[</span><span class="s2">&quot;fraudar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_fraudar_graph</span>
+<span class="c1">#--------------------------</span>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../modules/example.html#example.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run a given algorithm with the Amazon dataset.</span>
+
+<span class="sd">    Runs a given algorithm and outputs anomalous scores and summaries after</span>
+<span class="sd">    each iteration finishes. The function will ends if a given number of loops</span>
+<span class="sd">    ends or the update of one iteration becomes smaller than a given threshold.</span>
+
+<span class="sd">    Some algorithm requires a set of parameters. For example, feagle requires</span>
+<span class="sd">    parameter `epsilon`. Argument `param` specifies those parameters, and</span>
+<span class="sd">    if you want to set 0.1 to the `epsilon`, pass `epsilon=0.1` via the</span>
+<span class="sd">    argument.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      method: name of algorithm.</span>
+<span class="sd">      loop: the number of iteration (default: 20).</span>
+<span class="sd">      threshold: threshold to judge an update is negligible (default: 10^-3).</span>
+<span class="sd">      output: writable object where the output will be written.</span>
+<span class="sd">      param: list of key and value pair which are connected with &quot;=&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">param</span><span class="p">]}</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">ALGORITHMS</span><span class="p">[</span><span class="n">method</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">amazon</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="n">amazon</span><span class="o">.</span><span class="n">print_state</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+    <span class="c1"># Updates</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Start iterations.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="n">loop</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;one&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span><span class="p">):</span>
+
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">diff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Current summary</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="s2"> ends. (diff=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+        <span class="n">amazon</span><span class="o">.</span><span class="n">print_state</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+    <span class="c1"># Print final state.</span>
+    <span class="n">amazon</span><span class="o">.</span><span class="n">print_state</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;final&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../modules/example.html#example.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;The main function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ALGORITHMS</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No algorithms are installed.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">dsargparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="n">main</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ALGORITHMS</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">dsargparse</span><span class="o">.</span><span class="n">FileType</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">),</span>  <span class="c1"># pylint: disable=no-member</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;file path to store results (Default: stdout).&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--loop&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--threshold&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="o">^-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--param&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[],</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;key and value pair which are connected with &#39;=&#39;.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;This option can be set multiply.&quot;</span><span class="p">))</span>
+
+    <span class="n">run</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()))</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Untracked exception occurred.&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div> </div> <div class="articleComments"> </div> </div> <footer> <hr> <div role="contentinfo"> <p> &copy; Copyright 2017, Junpei Kawamoto. </p> </div> Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. <p> </p><div class="addthis_inline_follow_toolbox"></div> <p></p> <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4734862314145555" data-ad-slot="6934003829" data-ad-format="auto"></ins> <script>(adsbygoogle=window.adsbygoogle||[]).push({})</script> </footer> </div> </div> </section> </div> <script>var DOCUMENTATION_OPTIONS={URL_ROOT:"../",VERSION:"0.5.0",COLLAPSE_INDEX:!1,FILE_SUFFIX:".html",HAS_SOURCE:!0,SOURCELINK_SUFFIX:".txt"}</script> <script src="../_static/jquery.js"></script> <script src="../_static/underscore.js"></script> <script src="../_static/doctools.js"></script> <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <script src="../_static/js/theme.js"></script> <script>jQuery(function(){SphinxRtdTheme.StickyNav.enable()})</script> <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57f1fa5b740feddd"></script> </body> </html>
