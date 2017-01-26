@@ -68,7 +68,7 @@ by `pip install rgmining-fraudar`.
 
 ## License
 This software is released under The GNU General Public License Version 3,
-see [COPYING](COPYING) for more detail.
+see [COPYING](https://github.com/rgmining/amazon/blob/master/COPYING) for more detail.
 
 The authors of the Trip Advisor dataset, which this software imports, requires to
 cite the following papers when you publish research papers using this package:

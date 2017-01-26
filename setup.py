@@ -16,7 +16,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# along with rgmining-amazon-dataset.  If not, see <http://www.gnu.org/licenses/>.
 #
 # pylint: disable=invalid-name
 """Package information about an amazon dataset for review graph mining.
@@ -27,6 +27,12 @@ from setuptools import setup
 import site
 import sys
 import urllib
+
+
+def read(fname):
+    """Read a file.
+    """
+    return open(path.join(path.dirname(__file__), fname)).read()
 
 
 class CustomInstallData(distutils.command.install_data.install_data):
@@ -51,7 +57,7 @@ class CustomInstallData(distutils.command.install_data.install_data):
         return distutils.command.install_data.install_data.run(self)
 
 
-def _load_requires_from_file(filepath):
+def load_requires_from_file(filepath):
     """Read a package list from a given file path.
 
     Args:
@@ -66,15 +72,19 @@ def _load_requires_from_file(filepath):
 
 setup(
     name="rgmining-amazon-dataset",
-    version="0.5.0",
+    use_scm_version=True,
     author="Junpei Kawamoto",
     author_email="kawamoto.junpei@gmail.com",
     description="An Amazon dataset for Review Graph Mining Project",
+    long_description=read("README.rst"),
     url="https://github.com/rgmining/amazon",
     py_modules=[
         "amazon"
     ],
-    install_requires=_load_requires_from_file("requirements.txt"),
+    setup_requires=[
+        "setuptools_scm"
+    ],
+    install_requires=load_requires_from_file("requirements.txt"),
     data_files=[(
         "rgmining/data",
         ["http://times.cs.uiuc.edu/~wang296/Data/LARA/Amazon/AmazonReviews.zip"]

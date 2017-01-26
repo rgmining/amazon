@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 #
-# sample.py
+# example.py
 #
 # Copyright (c) 2017 Junpei Kawamoto
 #
@@ -17,7 +17,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+# along with rgmining-amazon-dataset.  If not, see <http://www.gnu.org/licenses/>.
 #
 """Evaluate a review graph mining algorithm with the amazon dataset.
 """
