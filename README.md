@@ -1,8 +1,8 @@
 # Amazon Dataset Loader
 [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 [![Build Status](https://travis-ci.org/rgmining/amazon.svg?branch=master)](https://travis-ci.org/rgmining/amazon)
-[![Release](https://img.shields.io/badge/release-0.5.0-brightgreen.svg)](https://github.com/rgmining/amazon/releases/tag/v0.5.0)
-[![PyPi](https://img.shields.io/badge/pypi-0.5.0-brightgreen.svg)](https://pypi.python.org/pypi/rgmining-tripadvisor-dataset)
+[![Release](https://img.shields.io/badge/release-0.5.1-brightgreen.svg)](https://github.com/rgmining/amazon/releases/tag/v0.5.1)
+[![PyPi](https://img.shields.io/badge/pypi-0.5.1-brightgreen.svg)](https://pypi.python.org/pypi/rgmining-tripadvisor-dataset)
 
 [![Logo](https://rgmining.github.io/amazon/_static/image.png)](https://rgmining.github.io/amazon/)
 

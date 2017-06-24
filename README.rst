@@ -98,9 +98,9 @@ using this package:
    :target: https://www.gnu.org/copyleft/gpl.html
 .. |Build Status| image:: https://travis-ci.org/rgmining/amazon.svg?branch=master
    :target: https://travis-ci.org/rgmining/amazon
-.. |Release| image:: https://img.shields.io/badge/release-0.5.0-brightgreen.svg
-   :target: https://github.com/rgmining/amazon/releases/tag/v0.5.0
-.. |PyPi| image:: https://img.shields.io/badge/pypi-0.5.0-brightgreen.svg
+.. |Release| image:: https://img.shields.io/badge/release-0.5.1-brightgreen.svg
+   :target: https://github.com/rgmining/amazon/releases/tag/v0.5.1
+.. |PyPi| image:: https://img.shields.io/badge/pypi-0.5.1-brightgreen.svg
    :target: https://pypi.python.org/pypi/rgmining-tripadvisor-dataset
 .. |Logo| image:: https://rgmining.github.io/amazon/_static/image.png
    :target: https://rgmining.github.io/amazon/
