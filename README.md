@@ -1,14 +1,16 @@
+> [!IMPORTANT]
+> Unfortunately, this dataset is no longer accessible.
+
 # Amazon Dataset Loader
 [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
-[![Build Status](https://travis-ci.org/rgmining/amazon.svg?branch=master)](https://travis-ci.org/rgmining/amazon)
 [![Release](https://img.shields.io/badge/release-0.5.1-brightgreen.svg)](https://github.com/rgmining/amazon/releases/tag/v0.5.1)
-[![PyPi](https://img.shields.io/badge/pypi-0.5.1-brightgreen.svg)](https://pypi.python.org/pypi/rgmining-tripadvisor-dataset)
+[![PyPi](https://img.shields.io/badge/pypi-0.5.1-brightgreen.svg)](https://pypi.python.org/pypi/rgmining-amazon-dataset)
 
 [![Logo](https://rgmining.github.io/amazon/_static/image.png)](https://rgmining.github.io/amazon/)
 
 For the [Review Graph Mining project](https://github.com/rgmining),
 this package provides a loader of the
-[Six Categories of Amazon Product Reviews dataset](http://times.cs.uiuc.edu/~wang296/Data/)
+[Six Categories of Amazon Product Reviews dataset](https://www.cs.virginia.edu/~hw5x/dataset.html)
 provided by [Dr. Wang](http://www.cs.virginia.edu/~hw5x/).
 
 
